@@ -1,0 +1,24 @@
+<body>
+<script>
+function getPath(url) {
+  var re = /^http:\/\/codesearch.google.com\/codesearch#[^/]+\/([^&?]+)/;
+  var match = url.match(re);
+  if (!match)
+    return null;
+  return match[1];
+}
+
+chrome.tabs.onUpdated.addListener(function(tabid, change, tab) {
+  if (getPath(tab.url))
+    chrome.pageAction.show(tabid);
+  else
+    chrome.pageAction.hide(tabid);
+});
+chrome.pageAction.onClicked.addListener(function(tab) {
+  var path = getPath(tab.url);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:60695/' + path);
+  xhr.send();
+});
+</script>
+</body>

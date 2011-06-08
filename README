@@ -1,0 +1,5 @@
+1) run edit-server.py; it listens on localhost:0xED17
+2) install the extension; it sends filenames to that server
+
+You'll likely need to modify edit-server.py to fix the path
+to your source.

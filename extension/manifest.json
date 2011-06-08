@@ -1,0 +1,12 @@
+{
+  "name": "Edit locally",
+  "version": "1",
+  "page_action": {
+    "default_icon": "emacs.png",
+    "default_title": "Edit local version of this file in emacs"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "background_page": "background.html"
+}
