@@ -6,7 +6,11 @@
     "default_title": "Edit local version of this file in emacs"
   },
   "permissions": [
+    "contextMenus",
     "tabs"
   ],
-  "background_page": "background.html"
+  "background_page": "background.html",
+  "icons": {
+    "16": "emacs.png"
+  }
 }

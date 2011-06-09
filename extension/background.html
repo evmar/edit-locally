@@ -8,6 +8,20 @@ function getPath(url) {
   return match[1];
 }
 
+function openEditor(path) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:60695/' + path);
+  xhr.send();
+}
+
+chrome.contextMenus.create({
+  title: 'Open as path in emacs',
+  contexts: ['selection'],
+  onclick: function(info, tab) {
+    openEditor(info.selectionText);
+  }
+});
+
 chrome.tabs.onUpdated.addListener(function(tabid, change, tab) {
   if (getPath(tab.url))
     chrome.pageAction.show(tabid);
@@ -16,9 +30,7 @@ chrome.tabs.onUpdated.addListener(function(tabid, change, tab) {
 });
 chrome.pageAction.onClicked.addListener(function(tab) {
   var path = getPath(tab.url);
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:60695/' + path);
-  xhr.send();
+  openEditor(path);
 });
 </script>
 </body>
