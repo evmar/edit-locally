@@ -1,11 +1,19 @@
 <body>
 <script>
+var kMappings = [
+  [/^http:\/\/codesearch.google.com\/codesearch#[^/]+\/([^&?]+)/],
+  [/^http:\/\/trac.webkit.org\/browser\/trunk\/([^&?]+)/, 'third_party/WebKit/'],
+];
+
 function getPath(url) {
-  var re = /^http:\/\/codesearch.google.com\/codesearch#[^/]+\/([^&?]+)/;
-  var match = url.match(re);
-  if (!match)
-    return null;
-  return match[1];
+  for (var i = 0; i < kMappings.length; ++i) {
+    var re = kMappings[i][0], path = kMappings[i][1];
+    var match = url.match(re);
+    if (match) {
+      return path + match[1];
+    }
+  }
+  return null;
 }
 
 function openEditor(path) {
