@@ -7,7 +7,7 @@ var kMappings = [
 
 function getPath(url) {
   for (var i = 0; i < kMappings.length; ++i) {
-    var re = kMappings[i][0], path = kMappings[i][1];
+    var re = kMappings[i][0], path = kMappings[i][1] || '';
     var match = url.match(re);
     if (match) {
       return path + match[1];
